@@ -75,7 +75,7 @@ socket.on('can-msg', function(msg) {
 	console.log(canData.name);
 	switch (canData.name) {
 		case 'vss': //vehicle speed
-			document.getElementById('CAN').innerHTML = canData.value;
+			document.getElementById('Speed').innerHTML = canData.value;
 			break;
 		default:
 			break;

@@ -9,6 +9,7 @@ var client  = mqtt.connect('mqtt://hri.stanford.edu',
                            {port: 8134,
                             protocolId: 'MQIsdp',
                             protocolVersion: 3 });
+var language = 'english'
 
 // use express to create the simple webapp
 app.use(express.static('public'));		// find pages in public directory
