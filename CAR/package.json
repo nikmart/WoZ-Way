@@ -1,0 +1,17 @@
+{
+  "name": "WoZ-Way-CAR",
+  "version": "0.0.1",
+  "private": true,
+  "description": "WoZ Way in car code",
+  "main": "server.js",
+  "author": "Nik Martelaro <nmartelaro@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.4",
+    "mqtt": "^1.7.0",
+    "say": "^0.6.0",
+    "serial-obd": "^0.2.1",
+    "serialport": "^4.0.7",
+    "socket.io": "^1.4.5"
+  }
+}
