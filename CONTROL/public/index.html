@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Needfinding Machine Control Staion</title>
+<script src="/socket.io/socket.io.js"></script>
+<link rel="stylesheet" type="text/css" href="GitHub2.css">
+</head>
+
+<body>
+<h1>Needfinding Machine Control Station</h1>
+
+<table style="width:100%">
+  <tr>
+    <th>CAN</th>
+
+  </tr>
+  <tr>
+    <td align="center" id="CAN"> <b>XXX</b> </td>
+  </tr>
+</table>
+
+<div id="wrap">
+    <div id="left_col">
+        <h3>Type your message to send to the car here:</h3>
+        <input type="text" id="message" name="message" style="width: 400px;" onKeyDown="sendOnEnter()">
+        <p></p>
+
+        <button onClick="sendMsg()">Send</button> <button onClick="resetMsg()">Reset</button>
+
+<h5>Previous Questions</h5>
+        <div id="questions">
+
+        </div>
+    </div>
+
+    <div id="right_col">
+        <h5>Common Questions</h5>
+
+      <label id="q1">What is the best part of the system?</label><input type="button" onClick="playMsg('q1')" value="Play" style="float: right;">
+        <br>
+
+      <label id="q2">What is the worst part of the system?</label><input type="button" onClick="playMsg('q2')" value="Play" style="float: right;">
+        <br>
+
+      <label id="q3">What would you change?</label><input type="button" onClick="playMsg('q3')" value="Play" style="float: right;">
+        <br>
+        <label id="q4">How do you feel using the system?</label>
+        <input type="button" onClick="playMsg('q4')" value="Play" style="float: right;">
+        <br>
+
+      <label id="q5">Do you feel safe?</label><input type="button" onClick="playMsg('q5')" value="Play" style="float: right;">
+        <br>
+
+        <label id="q6">Can you tell me more?</label><input type="button" onClick="playMsg('q6')" value="Play" style="float: right;">
+        <br>
+
+        <label id="q7">What do you think the system is doing?</label><input type="button" onClick="playMsg('q7')" value="Play" style="float: right;">
+        <br>
+
+        <p>
+        <h5>Language</h5>
+          <label>
+            <input type="radio" name="RadioGroup1" value="english" id="RadioGroup1_0" onChange="readEnglish()">
+            English</label>
+          <br>
+          <label>
+            <input type="radio" name="RadioGroup1" value="french" id="RadioGroup1_1" onChange="readFrench()">
+            French</label>
+          <br>
+          <label>
+            <input type="radio" name="RadioGroup1" value="japanese" id="RadioGroup1_2" onChange="readJapanese()">
+            Japanese</label>
+          <br>
+        </p>
+
+  </div>
+</div>
+</body>
+
+
+<script src="client.js"></script>
+</html>

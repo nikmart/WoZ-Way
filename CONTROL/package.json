@@ -1,0 +1,16 @@
+{
+  "name": "carRemoteWoZStation",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Data server for the eGolf",
+  "main": "server.js",
+  "author": "Nik Martelaro <nmartelaro@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.4",
+    "jsonfile": "^2.2.3",
+    "mqtt": "^1.7.0",
+    "say": "^0.6.0",
+    "socket.io": "^1.4.5"
+  }
+}
