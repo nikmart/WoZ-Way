@@ -1,5 +1,6 @@
 // JavaScript Document
 var socket = io();
+var RGB;
 
 function sendOnEnter(){
 	// send on enter key
@@ -12,7 +13,9 @@ function sendMsg(){
 	// get and send the messge to the remote interface
 	var msg = document.getElementById("message").value;
 	console.log(msg);
+  socket.emit('lights', RGB); // send light color
 	socket.emit('msg', msg);  //send the message to ther server
+
 
 	// add the question to the list
 	addQuestion(msg);
@@ -50,6 +53,21 @@ function playMsg(msgID){
 	var msg = document.getElementById(msgID).innerHTML;
 	console.log(msg);
 	socket.emit('msg', msg);  //send the message to ther server
+}
+
+function update(picker) {
+    //document.getElementById('hex-str').innerHTML = picker.toHEXString();
+    //document.getElementById('rgb-str').innerHTML = picker.toRGBString();
+
+    // document.getElementById('rgb').innerHTML =
+    //     Math.round(picker.rgb[0]) + ', ' +
+    //     Math.round(picker.rgb[1]) + ', ' +
+    //     Math.round(picker.rgb[2]);
+
+    RGB = Math.round(picker.rgb[0]) + ',' +
+         Math.round(picker.rgb[1]) + ',' +
+         Math.round(picker.rgb[2])
+    console.log(RGB);
 }
 
 function readEnglish(){
@@ -94,6 +112,8 @@ socket.on('can-msg', function(msg) {
 			break;
 	}
 });
+
+
 
 // function initMap() {
 // 		var alpha = 0.4;

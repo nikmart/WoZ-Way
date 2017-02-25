@@ -20,7 +20,7 @@ client.on('connect', function () {
   //Subscribe to topics
   client.subscribe('say');
   client.subscribe('can');  //CAN data in JSON
-  client.subscribe('gps'); 
+  client.subscribe('gps');
   console.log("Waiting for messages...");
   client.publish('say', 'Hello, I am a need finding machine');
 });
@@ -61,6 +61,11 @@ io.on('connect', function(socket) {
       console.log(lang);
       language = lang;
     });
+
+    socket.on('lights', function(msg) {
+      console.log("RGB: " + msg);
+      client.publish('lights', msg);
+    })
 
     // if you get the 'disconnect' message, say the user disconnected
     socket.on('disconnect', function() {

@@ -11,7 +11,7 @@ var say = require('say');
 var OBDReader = require('serial-obd');
 var options = {};
 options.baudrate = 115200;
-var serialOBDReader = new OBDReader("/dev/tty.usbserial-00001014", options);
+var serialOBDReader = new OBDReader("/dev/tty.usbserial-00002114", options);
 var dataReceivedMarker = {};
 var pollingRate = 250; //polling rate in milliseconds
 
@@ -38,6 +38,21 @@ serialOBDReader.on('connected', function (data) {
 
 serialOBDReader.connect();
 
+var serialport = require("serialport");
+// start the serial port connection to the Arduino for the lights
+var serial = new serialport.SerialPort("/dev/tty.usbserial-00002214", {
+    parser: serialport.parsers.readline('\r\n')
+});
+
+serial.on('open', function() {
+    serial.write('255,0,0\n', function(err) {
+        if (err) {
+            return console.log('Error on write: ', err.message);
+        }
+        console.log('message written');
+    });
+});
+
 // Setup the socket connection and listen for messages
 client.on('connect', function () {
   client.subscribe('say');
@@ -45,6 +60,7 @@ client.on('connect', function () {
   client.subscribe('french');
   client.subscribe('japanese');
   client.subscribe('test');
+  client.subscribe('lights');
   console.log("Waiting for messages...");
 
   testingMsgs();
@@ -83,6 +99,11 @@ client.on('message', function (topic, message) {
     console.log('japanese');
     say.speak('Kyoko', message.toString());
   }
+
+  if (topic === 'lights') {
+        console.log('Send Lights: ' + message.toString());
+        serial.write(message.toString() + '\n');
+    }
 
   //client.end();
 });

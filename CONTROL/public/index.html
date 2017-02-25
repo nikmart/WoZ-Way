@@ -1,10 +1,11 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>WoZ Way Control Staion</title>
-<script src="/socket.io/socket.io.js"></script>
-<link rel="stylesheet" type="text/css" href="GitHub2.css">
+  <meta charset="UTF-8">
+  <title>WoZ Way Control Staion</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <link rel="stylesheet" type="text/css" href="GitHub2.css">
+  <script src="jscolor.js"></script>
 </head>
 
 <body>
@@ -31,6 +32,7 @@
         <p></p>
 
         <button onClick="sendMsg()">Send</button> <button onClick="resetMsg()">Reset</button>
+        <input class="jscolor {onFineChange:'update(this)'}" value="ffcc00">
 
 <h5>Previous Questions</h5>
         <div id="questions">
