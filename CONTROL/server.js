@@ -20,6 +20,7 @@ client.on('connect', function () {
   //Subscribe to topics
   client.subscribe('say');
   client.subscribe('can');  //CAN data in JSON
+  client.subscribe('gps'); 
   console.log("Waiting for messages...");
   client.publish('say', 'Hello, I am a need finding machine');
 });

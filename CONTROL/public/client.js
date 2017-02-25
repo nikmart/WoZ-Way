@@ -77,10 +77,52 @@ socket.on('can-msg', function(msg) {
 		case 'vss': //vehicle speed
 			document.getElementById('Speed').innerHTML = canData.value;
 			break;
+		case 'rpm':
+			rpm = Math.round(canData.value);
+			if (rpm) {
+				document.getElementById('RPM').style.backgroundColor = "Orange";
+			}
+			else {
+				document.getElementById('RPM').style.backgroundColor = "LightGreen";
+			}
+			document.getElementById('RPM').innerHTML = Math.round(canData.value);
+			break;
+		case 'app_e':
+			document.getElementById('APP_E').innerHTML = Math.round(canData.value * (100/59) - 3200/59);
+			break;
 		default:
 			break;
 	}
 });
+
+// function initMap() {
+// 		var alpha = 0.4;
+// 		var state = {lat: 0, lng: 0};
+// 		var map = new google.maps.Map(document.getElementById('map'), {
+// 				center: state,
+// 				zoom: 15
+// 		});
+// 		var marker = new google.maps.Marker({
+// 				position: state,
+// 				map: map,
+// 				title: 'Your Position'
+// 		});
+// 		socket.on('gps-msg', function(pos) {
+//
+// 				if (pos.lat === null || pos.lon === null) {
+// 						return;
+// 				}
+// 				if (state.lat === 0 && state.lng === 0) {
+// 						state.lat = pos.lat;
+// 						state.lng = pos.lon;
+// 				} else {
+// 						state.lat = (1 - alpha) * state.lat + alpha * pos.lat;
+// 						state.lng = (1 - alpha) * state.lng + alpha * pos.lon;
+// 				}
+// 				map.setCenter(state);
+// 				marker.setPosition(state);
+// 		});
+// }
 
     //switch(json_msg.name) {
         // case 'CAN':

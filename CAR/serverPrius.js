@@ -7,36 +7,34 @@ var client = mqtt.connect('mqtt://hri.stanford.edu',
 // Text to speech setup
 var say = require('say');
 
-// OBD Setup (used for standard OBD-II devices like the )
-var OBDReader = require('serial-obd');
-var options = {};
-options.baudrate = 115200;
-var serialOBDReader = new OBDReader("/dev/tty.usbserial-00001014", options);
-var dataReceivedMarker = {};
-var pollingRate = 250; //polling rate in milliseconds
-
-serialOBDReader.on('dataReceived', function (data) {
-    console.log(data);
-    dataReceivedMarker = data;
-    // send the data to the MQTT server
-    client.publish('can', JSON.stringify(data));
-});
-
-serialOBDReader.on('connected', function (data) {
-    this.addPoller("vss"); //vehicles speed
-    this.addPoller("rpm"); //engine RPM
-    //this.addPoller("throttlepos");
-    //this.addPoller("tp_b");
-    this.addPoller("app_e");
-    // this.addPoller("temp");
-    //this.addPoller("load_pct");
-    // this.addPoller("map");
-    // this.addPoller("frp");
-
-    this.startPolling(pollingRate); //Polls all added pollers at given rate.
-});
-
-serialOBDReader.connect();
+// // OBD Setup (used for standard OBD-II devices like the )
+// var OBDReader = require('serial-obd');
+// var options = {};
+// options.baudrate = 115200;
+// var serialOBDReader = new OBDReader("/dev/tty.usbserial-113010768803", options);
+// var dataReceivedMarker = {};
+// var pollingRate = 250; //polling rate in milliseconds
+//
+// serialOBDReader.on('dataReceived', function (data) {
+//     console.log(data);
+//     dataReceivedMarker = data;
+//     // send the data to the MQTT server
+//     client.publish('can', JSON.stringify(data));
+// });
+//
+// serialOBDReader.on('connected', function (data) {
+//     this.addPoller("vss"); //vehicles speed
+//     //this.addPoller("rpm"); //engine RPM
+//     //this.addPoller("throttlepos"); //Absolute throttle position [1 - 100]
+//     // this.addPoller("temp");
+//     // this.addPoller("load_pct");
+//     // this.addPoller("map");
+//     // this.addPoller("frp");
+//
+//     this.startPolling(pollingRate); //Polls all added pollers at given rate.
+// });
+//
+// serialOBDReader.connect();
 
 // Setup the socket connection and listen for messages
 client.on('connect', function () {
