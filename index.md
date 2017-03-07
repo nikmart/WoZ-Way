@@ -10,7 +10,7 @@ Interaction designers often have difficulty understanding people’s real-world 
 ### Suggested Citation
 If you use any part of this code for your own research, please cite:
 
-Nikolas Martelaro and Wendy Ju. 2017. WoZ Way: Enabling real-time interaction prototyping and on-road observation. _To appear CSCW ’17_.
+Nikolas Martelaro and Wendy Ju. 2017. WoZ Way: Enabling Real-time Remote Interaction Prototyping & Observation in On-road Vehicles. In Proceedings of the 2017 ACM Conference on Computer Supported Cooperative Work and Social Computing (CSCW '17). ACM, New York, NY, USA, 169-182. DOI: https://doi.org/10.1145/2998181.2998293
 
 ### Authors and Contributors
 This project was developed by @nikmart for his thesis work at Stanford's Center for Design Research.
