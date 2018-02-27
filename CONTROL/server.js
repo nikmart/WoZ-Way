@@ -82,7 +82,7 @@ io.on('connect', function(socket) {
     console.log('a user connected');
 
     // if you get a message to send, send to the MQTT broker
-    socket.on('msg', function(msg) {
+    socket.on('say', function(msg) {
         console.log(msg);
         //send it to the mqtt broker
         client.publish('say', msg);

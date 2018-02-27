@@ -1,3 +1,20 @@
+/*
+client.js - CONTROL
+
+Author: Niklas Martelaro (nmartelaro@gmail.com)
+
+Purpose: This is the client side interaction code. I handles capturing data from
+the message input areas, button clicks, and dynamic data displays on the
+webpage.
+
+The client communicates with the CONTROL server using WebSockets.
+
+Usage: Automatically served from the CONTROL server.
+
+Notes: You will need to specify what the WebSocket topics. They can be the same
+or different from the MQTT topics.
+*/
+
 // JavaScript Document
 var socket = io();
 
@@ -12,7 +29,7 @@ function sendMsg(){
 	// get and send the messge to the remote interface
 	var msg = document.getElementById("message").value;
 	console.log(msg);
-	socket.emit('msg', msg);  //send the message to ther server
+	socket.emit('say', msg);  //send the message to ther server
 
 
 	// add the question to the list
@@ -39,30 +56,31 @@ function addQuestion(msg){
 
 	para.appendChild(btn);
 	var element = document.getElementById("questions");
-	element.appendChild(para);
+	element.prepend(para);
 }
 
 function replayMsg(msg){
 	console.log(msg);
-	socket.emit('msg', msg);  //send the message to ther server
+	socket.emit('say', msg);  //send the message to ther server
 }
 
 function playMsg(msgID){
 	var msg = document.getElementById(msgID).innerHTML;
 	console.log(msg);
-	socket.emit('msg', msg);  //send the message to ther server
+	socket.emit('say', msg);  //send the message to ther server
 }
 
 // read the data from the message that the server sent and change the
 // display based on the message
-// message should have a name, value, and date
 socket.on('can-msg', function(msg) {
 	canData = JSON.parse(msg);
 	console.log(canData.name);
+
 	switch (canData.name) {
 		case 'vss': //vehicle speed
 			document.getElementById('Speed').innerHTML = canData.value;
 			break;
+
 		case 'rpm':
 			rpm = Math.round(canData.value);
 			if (rpm) {
@@ -73,6 +91,7 @@ socket.on('can-msg', function(msg) {
 			}
 			document.getElementById('RPM').innerHTML = Math.round(canData.value);
 			break;
+
 		default:
 			break;
 	}
