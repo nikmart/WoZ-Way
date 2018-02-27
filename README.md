@@ -21,7 +21,7 @@ forth to the car using a wizard control interface.
 3. A high speed internet conenction
 
 ### Message Broker
-WoZ Way used MQTT, a popular publish/subscribe messaging protocol to communicate messages between the car and the control interface. This is done so that only the MQTT broker IP needs to be known. I use a popular and free MQTT broker called Mosquitto [https://mosquitto.org]
+WoZ Way used MQTT, a popular publish/subscribe messaging protocol to communicate messages between the car and the control interface. This is done so that only the MQTT broker IP needs to be known. I use a popular and free MQTT broker called Mosquitto [https://mosquitto.org]. You can set up Mosquitto on a Unix based server fairly easily. 
 
 ## Instructions
 1. Make sure you have NodeJS installed on both the CAR computer and the CONTROL server. If you are on a Mac and
@@ -43,7 +43,7 @@ of from the Common Questions area by clicking the buttons.
 7. (Additional) If you can serve the control interface from a known server with a public IP, then you can navigate to `<your.server.ip>:8000`
 
 ### MQTT Setup
-The sample code provided
+The sample code provided points to an MQTT broker running on a server at Stanford's Center for Design Research. You can use this for testing, however, for your own work, please setup your own MQTT broker and change the ip and port in botht he CAR and CONTROL code to point to your own broker.
 
 ### Changing Vocies on macOS
 
