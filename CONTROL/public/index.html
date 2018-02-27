@@ -5,7 +5,6 @@
   <title>WoZ Way Control Staion</title>
   <script src="/socket.io/socket.io.js"></script>
   <link rel="stylesheet" type="text/css" href="GitHub2.css">
-  <script src="jscolor.js"></script>
 </head>
 
 <body>
@@ -15,13 +14,11 @@
   <tr>
     <th>Speed</th>
     <th>RPM</th>
-    <th>Accel Pedal</th>
 
   </tr>
   <tr>
     <td align="center" id="Speed"> <b>XXX</b> </td>
     <td align="center" id="RPM"> <b>XXX</b> </td>
-    <td align="center" id="APP_E"> <b>XXX</b> </td>
   </tr>
 </table>
 
@@ -32,7 +29,6 @@
         <p></p>
 
         <button onClick="sendMsg()">Send</button> <button onClick="resetMsg()">Reset</button>
-        <input class="jscolor {onFineChange:'update(this)'}" value="ffcc00">
 
 <h5>Previous Questions</h5>
         <div id="questions">
@@ -63,22 +59,6 @@
 
         <label id="q7">What do you think the system is doing?</label><input type="button" onClick="playMsg('q7')" value="Play" style="float: right;">
         <br>
-
-        <p>
-        <h5>Language</h5>
-          <label>
-            <input type="radio" name="RadioGroup1" value="english" id="RadioGroup1_0" onChange="readEnglish()">
-            English</label>
-          <br>
-          <label>
-            <input type="radio" name="RadioGroup1" value="french" id="RadioGroup1_1" onChange="readFrench()">
-            French</label>
-          <br>
-          <label>
-            <input type="radio" name="RadioGroup1" value="japanese" id="RadioGroup1_2" onChange="readJapanese()">
-            Japanese</label>
-          <br>
-        </p>
 
   </div>
 </div>

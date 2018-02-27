@@ -1,3 +1,22 @@
+/*
+server.js - CAR
+
+Author: Niklas Martelaro (nmartelaro@gmail.com)
+
+Purpose: This is the server for the WoZ Way in car system. It can send messages
+back to the control interface as well as recieve messages from the control
+interface. Theis messageing is handled using and MQTT server in a known
+location.
+
+The server subscribes to MQTT messages from the control interfcae and publishes
+MQTT messages that will the control interface will listen to.
+
+Usage: node server.js
+
+Notes: You will need to specify what MQTT server you would like to use.
+*/
+
+//****************************** SETUP ***************************************//
 // MQTT Setup
 var mqtt   = require('mqtt');
 var client = mqtt.connect('mqtt://hri.stanford.edu',
@@ -6,64 +25,16 @@ var client = mqtt.connect('mqtt://hri.stanford.edu',
                             protocolVersion: 3 });
 // Text to speech setup
 var say = require('say');
+//****************************************************************************//
 
-// OBD Setup (used for standard OBD-II devices like the )
-var OBDReader = require('serial-obd');
-var options = {};
-options.baudrate = 115200;
-var serialOBDReader = new OBDReader("/dev/tty.usbserial-00002114", options);
-var dataReceivedMarker = {};
-var pollingRate = 250; //polling rate in milliseconds
-
-serialOBDReader.on('dataReceived', function (data) {
-    console.log(data);
-    dataReceivedMarker = data;
-    // send the data to the MQTT server
-    client.publish('can', JSON.stringify(data));
-});
-
-serialOBDReader.on('connected', function (data) {
-    this.addPoller("vss"); //vehicles speed
-    this.addPoller("rpm"); //engine RPM
-    //this.addPoller("throttlepos");
-    //this.addPoller("tp_b");
-    this.addPoller("app_e");
-    // this.addPoller("temp");
-    //this.addPoller("load_pct");
-    // this.addPoller("map");
-    // this.addPoller("frp");
-
-    this.startPolling(pollingRate); //Polls all added pollers at given rate.
-});
-
-serialOBDReader.connect();
-
-var serialport = require("serialport");
-// start the serial port connection to the Arduino for the lights
-var serial = new serialport.SerialPort("/dev/tty.usbserial-00002214", {
-    parser: serialport.parsers.readline('\r\n')
-});
-
-serial.on('open', function() {
-    serial.write('255,0,0\n', function(err) {
-        if (err) {
-            return console.log('Error on write: ', err.message);
-        }
-        console.log('message written');
-    });
-});
-
+//********************** MQTT MESSAGES WITH ACTIONS **************************//
 // Setup the socket connection and listen for messages
 client.on('connect', function () {
-  client.subscribe('say');
-  client.subscribe('english');
-  client.subscribe('french');
-  client.subscribe('japanese');
-  client.subscribe('test');
-  client.subscribe('lights');
+  client.subscribe('say'); // messages from the wizard interface to speak out
   console.log("Waiting for messages...");
 
-  testingMsgs();
+  // messages for testing
+  client.publish('say', 'Hello, I am a need finding machine');
 });
 
 // Print out the messages and say messages that are topic: "say"
@@ -72,59 +43,25 @@ client.on('message', function (topic, message) {
   // message is Buffer
   console.log(topic, message.toString());
 
-  // Say the message
+  // Say the message using Apple's Text to speech
   if (topic === 'say') {
-    // use default voice in System Preferences
+    // use default voice in System Preferences - You can sent this yourself
     console.log('');
     say.speak(null, message.toString());
   }
 
-  if(topic === 'english') {
-    //use the english voice to say messages. Note: I am using the Samantha voice
-    //Also note that you must send english messages for this to work well
-    console.log('english');
-    say.speak('Samantha', message.toString());
-  }
-
-  if(topic === 'french') {
-    //use the French voice to say messages. Note: I am using the Audrey voice
-    //Also note that you must send french messages for this to work well
-    console.log('french');
-    say.speak('Audrey', message.toString());
-  }
-
-  if(topic === 'japanese') {
-    //use the Japanese voice to say messages. Note: I am using the Kyoko voice
-    //Also note that you must send japanese messages for this to work well
-    console.log('japanese');
-    say.speak('Kyoko', message.toString());
-  }
-
-  if (topic === 'lights') {
-        console.log('Send Lights: ' + message.toString());
-        serial.write(message.toString() + '\n');
-    }
-
   //client.end();
 });
+//****************************************************************************//
 
-function testingMsgs(){
-  // messages for testing
-  client.publish('test', 'MQTT Connected');
-  client.publish('say', 'Hello, I am a need finding machine');
-}
-
-/* -- Serial Comm: Useful for connecting to microcontrollers like Arduino -- //
-var serialport = require("serialport");
-var serialPort = new SerialPort("/dev/ttyUSB0", {
-  parser: serialport.parsers.readline("\0")
-});
-
-serialPort.on("open", function () {
-  console.log('open');
-  serialPort.on('data', function(data) {
-    console.log('data received: ' + data);
-    client.publish('can', data);
-  });
-});
-*/
+//********************** SIMULATED CAN DATA MESSAGES *************************//
+setInterval(function(){
+    //update with some random data every 200 ms
+    client.publish('can', '{"name":"vss", "value":' +
+      Math.floor(Math.random() * 90) +
+      '}')
+    client.publish('can', '{"name":"rpm", "value":' +
+      Math.floor(Math.random() * 6000) +
+      '}')
+}, 200);
+//****************************************************************************//
