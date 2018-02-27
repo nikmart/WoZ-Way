@@ -14,13 +14,18 @@ forth to the car using a wizard control interface.
 4. A high-speed 4G cellular router
 
 ### Control
+1. A server with NodeJS and avialble port open (default port is 8000)
 
-### Control
-1. Acce
+2. A computer with a modern web-browser
+
+3. A high speed internet conenction
+
+### Message Broker
+WoZ Way used MQTT, a popular publish/subscribe messaging protocol to communicate messages between the car and the control interface. This is done so that only the MQTT broker IP needs to be known. I use a popular and free MQTT broker called Mosquitto [https://mosquitto.org]
 
 ## Instructions
-1. Make sure you have NodeJS installed on your machine. If you are on a Mac and
-use Homebrew, you can use `brew install node`
+1. Make sure you have NodeJS installed on both the CAR computer and the CONTROL server. If you are on a Mac and
+use Homebrew [https://brew.sh], you can use `brew install node`
 
 2. Navigate to the **CONTROL** directory and run `npm install`
 
@@ -30,12 +35,15 @@ use Homebrew, you can use `brew install node`
 
 5. In the **CAR** directory, run `node server.js`
 
-6. In a web browser navigate to `localhost:8000` - this is where the control
+6. In a web browser, navigate to `localhost:8000` - this is where the control
 interface is. You should be able to see live data coming back from the car. You
 should also be able to send messages using the message input for custom messages
 of from the Common Questions area by clicking the buttons.
 
-7. If you can serve the control interface from a known server with a public IP, then you can navigate to `<your.server.ip>:8000`
+7. (Additional) If you can serve the control interface from a known server with a public IP, then you can navigate to `<your.server.ip>:8000`
+
+### MQTT Setup
+The sample code provided
 
 ### Changing Vocies on macOS
 
