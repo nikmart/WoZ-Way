@@ -45,7 +45,7 @@ of from the Common Questions area by clicking the buttons.
 ### MQTT Setup
 The sample code provided points to an MQTT broker running on a server at Stanford's Center for Design Research. You can use this for testing, however, for your own work, please setup your own MQTT broker and change the ip and port in botht he CAR and CONTROL code to point to your own broker.
 
-### Changing Vocies on macOS
+### Changing Voices on macOS
 
 You can set the default voice in your System Preferences -> Accessibilty -> Speech. I recommend you use voice with High Quality options.
 
