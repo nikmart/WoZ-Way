@@ -3,25 +3,22 @@
 This project contains sample code for getting started sending messages back and
 forth to the car using a wizard control interface.
 
-## Requirements
+## Software Requirements
 ### Car
 1. An Apple computer running macOS (required for use with Apple text to speech system)
 
 2. NodeJS 4+
 
-3. External speaker for text to speech
-
-4. A high-speed 4G cellular router
-
 ### Control
-1. A server with NodeJS and avialble port open (default port is 8000)
+1. A server with NodeJS 4+ and avialble port open (default port is 8000)
 
 2. A computer with a modern web-browser
 
-3. A high speed internet conenction
-
 ### Message Broker
 WoZ Way used MQTT, a popular publish/subscribe messaging protocol to communicate messages between the car and the control interface. This is done so that only the MQTT broker IP needs to be known. I use a popular and free MQTT broker called Mosquitto [https://mosquitto.org]. You can set up Mosquitto on a Unix based server fairly easily. 
+
+## Hardware Bill of Materials
+A full BOM can be found here: [https://docs.google.com/spreadsheets/d/115VWuHOhQsEnYNJsB6Nx3dnP3QcJT3YXV1De5LtsyNQ/edit?usp=sharing]
 
 ## Instructions
 1. Make sure you have NodeJS installed on both the CAR computer and the CONTROL server. If you are on a Mac and
